@@ -1,0 +1,15 @@
+
+{# read and display all flash messages #}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+{#TODO: need to put style on a separate file #}
+<style>
+    .flash-error{
+        color:red;
+    }
+</style>

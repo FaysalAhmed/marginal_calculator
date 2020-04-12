@@ -1,6 +1,4 @@
-<?php 
-// welcome controller 
-// entry point of the project 
+<?php
 
 namespace App\Controller;
 
