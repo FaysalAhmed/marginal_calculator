@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Inventory;
 use App\Entity\Purchase;
 use App\Entity\Sell;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,11 +16,9 @@ class WelcomeController extends AbstractController
      */
     public function index()
     {
-        // show the welcome page
-        // we will have a profit history. we will fetch latest profit from DB.
-        //
-        $profit = 0;
-       return $this->render('welcome/index.html.twig');
+        $profit = $this->getDoctrine()->getRepository(Sell::class)->getTotalProfit();
+
+        return $this->render('welcome/index.html.twig',['profit'=>$profit['profit']]);
     }
 
     /**
@@ -27,7 +26,7 @@ class WelcomeController extends AbstractController
      */
     public function resetDB()
     {
-        $this->getDoctrine()->getRepository(Purchase::class)->dropAll();
+        $this->getDoctrine()->getRepository(Inventory::class)->dropAll();
         $this->getDoctrine()->getRepository(Sell::class)->dropAll();
         $this->addFlash('success','Database Reset Complete');
         return $this->redirectToRoute('welcome');

@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Inventory;
 use App\Entity\Sell;
 use App\Form\Type\PurchaseType;
 use App\Form\Type\SellType;
+use App\Service\ProfitCalculator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,7 +48,7 @@ class SellController extends AbstractController
      * @param ValidatorInterface $validator
      * @return Response
      */
-    public function postAdd(Request $request, ValidatorInterface $validator) : Response
+    public function postAdd(Request $request, ValidatorInterface $validator, ProfitCalculator $calculator) : Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -56,6 +58,12 @@ class SellController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $sell = $form->getData();
+            $profit = $calculator->calculate($sell,$entityManager);
+            if($profit == false){
+                $this->addFlash('danger','Not enough item in inventory');
+                return $this->redirectToRoute('sell_add');
+            }
+            $sell->setProfit($profit);
             $entityManager->persist($sell);
             $entityManager->flush();
             $this->addFlash('success', 'Added a sell');

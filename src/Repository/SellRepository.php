@@ -28,4 +28,16 @@ class SellRepository extends ServiceEntityRepository
         );
         return $query->execute();
     }
+
+    public function getTotalProfit()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+        SELECT SUM(profit) AS profit FROM sell
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
 }

@@ -29,4 +29,17 @@ class InventoryRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+    public function getTotalInventoryItems()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+        SELECT SUM(quantity) AS quantity FROM inventory
+        ';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
 }

@@ -11,6 +11,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Profit</th>
                     <th scope="col">Created Time</th>
                 </tr>
                 </thead>
@@ -20,6 +21,7 @@
                         <th scope="row">{{ sell.getId() }}</th>
                         <td>{{ sell.getQuantity() }}</td>
                         <td>{{ sell.getPrice() }}</td>
+                        <td>{{ sell.getProfit() }}</td>
                         <td>{{ sell.getCreatedAt().format('Y-m-d H:i:s') }}</td>
                     </tr>
                 {% endfor %}

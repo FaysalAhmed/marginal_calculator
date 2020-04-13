@@ -26,6 +26,10 @@ class Sell
      * @ORM\Column(type="float")
      */
     private $price;
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $profit;
 
     /**
      * @ORM\Column(type="datetime")
@@ -64,6 +68,18 @@ class Sell
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getProfit(): ?float
+    {
+        return $this->profit;
+    }
+
+    public function setProfit(float $profit): self
+    {
+        $this->profit = $profit;
 
         return $this;
     }
