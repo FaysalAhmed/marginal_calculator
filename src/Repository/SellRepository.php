@@ -18,4 +18,14 @@ class SellRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Sell::class);
     }
+
+    public function dropAll()
+    {
+
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'DELETE FROM App\Entity\Sell'
+        );
+        return $query->execute();
+    }
 }

@@ -18,4 +18,15 @@ class PurchaseRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Purchase::class);
     }
+
+    public function dropAll()
+    {
+
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'DELETE FROM App\Entity\Purchase'
+        );
+        return $query->execute();
+    }
+
 }
