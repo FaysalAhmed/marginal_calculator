@@ -29,7 +29,7 @@ class PurchaseController extends AbstractController
      * @Route("/purchase", methods={"GET"}, name="purchase")
      * @return Response
      */
-    public function list() : Response
+    public function index() : Response
     {
         $repository = $this->getDoctrine()->getRepository(Purchase::class);
         $purchases = $repository->findAll();
