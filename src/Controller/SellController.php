@@ -16,10 +16,13 @@ class SellController extends AbstractController
     /**
      * @Route("/sell", name="sell")
      */
-    public function index()
+    public function index() : Response
     {
+        $repository = $this->getDoctrine()->getRepository(Sell::class);
+        $sells = $repository->findAll();
         return $this->render('sell/index.html.twig', [
             'controller_name' => 'SellController',
+            'sells'=>$sells
         ]);
     }
 

@@ -34,7 +34,7 @@ class PurchaseController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Purchase::class);
         $purchases = $repository->findAll();
 
-        return $this->render('purchase/list.html.twig',['purchases'=>$purchases]);
+        return $this->render('purchase/index.html.twig',['purchases'=>$purchases]);
     }
 
     /**
