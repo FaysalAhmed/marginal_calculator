@@ -31,7 +31,8 @@ class ProfitCalculator
         $inventories = $this->inventoryRepository->findAll();
         $inventoryPrice = 0;
         foreach($inventories as $inventory) {
-            if($inventory->getQuantity() < $itemCount) {
+            if($itemCount <=0) break;
+            if($inventory->getQuantity() <= $itemCount) {
                 // all items of inventory is required to fullfill.
                 $itemCount = $itemCount - $inventory->getQuantity();
                 $inventoryPrice = $inventoryPrice + ($inventory->getQuantity() * $inventory->getPrice());
@@ -43,7 +44,6 @@ class ProfitCalculator
                 $inventoryNewCount = $inventory->getQuantity() - $itemCount;
 
                 $inventoryPrice = $inventoryPrice + ($itemCount * $inventory->getPrice());
-                $itemCount =0;
                 $inventory->setQuantity($inventoryNewCount);
                 $entityManager->persist($inventory);
                 $entityManager->flush();
