@@ -8,11 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 class PurchaseController extends AbstractController
 {
     /**
-     * @Route("/purchase/add", methods={"GET"},name="purchase_add")
+     * @Route("/purchase/add", methods={"GET"}, name="purchase_add")
      */
     public function add() : Response
     {
@@ -22,6 +23,18 @@ class PurchaseController extends AbstractController
             'method' => 'POST'
         ]);
         return $this->render('purchase/add.html.twig', ['form'=>$form->createView()]);
+    }
+
+    /**
+     * @Route("/purchase", methods={"GET"}, name="purchase")
+     * @return Response
+     */
+    public function list() : Response
+    {
+        $repository = $this->getDoctrine()->getRepository(Purchase::class);
+        $purchases = $repository->findAll();
+
+        return $this->render('purchase/list.html.twig',['purchases'=>$purchases]);
     }
 
     /**
@@ -39,10 +52,10 @@ class PurchaseController extends AbstractController
             $purchase = $form->getData();
             $entityManager->persist($purchase);
             $entityManager->flush();
-            // TODO: show the list
-            return new Response("test");
+            $this->addFlash('success', 'Added a purchase');
+            return $this->redirectToRoute('purchase');
         } else {
-            $this->addFlash('error','error while adding purchase');
+            $this->addFlash('danger','error while adding purchase');
             return $this->redirectToRoute("purchase_add");
         }
 

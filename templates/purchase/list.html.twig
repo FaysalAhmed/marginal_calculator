@@ -1,0 +1,32 @@
+{% extends './base.html.twig' %}
+{% block title %} Purchase {% endblock %}
+{% block body %}
+    <div class="card mt-3" style="">
+        <div class="card-body">
+            <h5 class="card-title">Purchase List</h5>
+            <p class="card-text">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Created Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for purchase in purchases %}
+                    <tr>
+                        <th scope="row">{{ purchase.getId() }}</th>
+                        <td>{{ purchase.getQuantity() }}</td>
+                        <td>{{ purchase.getPrice() }}</td>
+                        <td>{{ purchase.getCreatedAt().format('Y-m-d H:i:s') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </p>
+        </div>
+    </div>
+
+{% endblock %}
