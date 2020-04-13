@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Purchase;
+use App\Entity\Inventory;
 use App\Form\Type\PurchaseType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +17,7 @@ class PurchaseController extends AbstractController
      */
     public function add() : Response
     {
-        $purchase = new Purchase();
+        $purchase = new Inventory();
         $form = $this->createForm(PurchaseType::class,$purchase,[
             'action' => $this->generateUrl('post_purchase_add'),
             'method' => 'POST'
@@ -26,12 +26,12 @@ class PurchaseController extends AbstractController
     }
 
     /**
-     * @Route("/purchase", methods={"GET"}, name="purchase")
+     * @Route("/inventory", methods={"GET"}, name="purchase")
      * @return Response
      */
     public function index() : Response
     {
-        $repository = $this->getDoctrine()->getRepository(Purchase::class);
+        $repository = $this->getDoctrine()->getRepository(Inventory::class);
         $purchases = $repository->findAll();
 
         return $this->render('purchase/index.html.twig',['purchases'=>$purchases]);
@@ -44,7 +44,7 @@ class PurchaseController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        $purchase = new Purchase();
+        $purchase = new Inventory();
         $form = $this->createForm(PurchaseType::class, $purchase);
         $form->handleRequest($request);
 
