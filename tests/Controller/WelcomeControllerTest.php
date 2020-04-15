@@ -125,7 +125,7 @@ class WelcomeControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->request('GET', '/');
-        $client->clickLink("Add New Purchase");
+        $client->clickLink("Buy New Items");
 
         $this->assertStringContainsString(
             'Add a purchase',
@@ -163,7 +163,7 @@ class WelcomeControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->request('GET', '/');
-        $client->clickLink("Add New Sell");
+        $client->clickLink("Sell Items");
 
         $this->assertStringContainsString(
             'Add a Sell',
