@@ -54,6 +54,7 @@ class SellController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Sell::class);
         $sells = $repository->findAll();
+
         return $this->render(
             'sell/index.html.twig',
             [
@@ -73,6 +74,7 @@ class SellController extends AbstractController
     public function add(): Response
     {
         $sell = new Sell();
+
         $form = $this->createForm(
             SellType::class,
             $sell,
@@ -81,6 +83,7 @@ class SellController extends AbstractController
                 'method' => 'POST'
             ]
         );
+
         return $this->render('sell/add.html.twig', ['form' => $form->createView()]);
     }
 
@@ -88,7 +91,6 @@ class SellController extends AbstractController
      * Store Sell data from add form
      *
      * @param Request            $request    Request Object
-     * @param ValidatorInterface $validator  Validator for form
      * @param ProfitCalculator   $calculator Class to calculate the profit
      *
      * @Route("sell/add", methods={"POST"}, name="post_sell_add")
@@ -115,10 +117,13 @@ class SellController extends AbstractController
             $sell->setProfit($profit);
             $entityManager->persist($sell);
             $entityManager->flush();
+
             $this->addFlash('success', 'Added a sell');
+
             return $this->redirectToRoute('sell');
         } else {
             $this->addFlash('danger', 'error while adding sells');
+
             return $this->redirectToRoute('sell_add');
         }
     }

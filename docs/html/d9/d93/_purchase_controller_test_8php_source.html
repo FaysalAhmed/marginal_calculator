@@ -103,14 +103,17 @@ $(document).ready(function(){initNavTree('d9/d93/_purchase_controller_test_8php_
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                <span class="stringliteral">&#39;purchase[price]&#39;</span> =&gt; 100</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            ]</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        );</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        $this-&gt;assertResponseRedirects(<span class="stringliteral">&#39;/inventory&#39;</span>);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        $client-&gt;request(<span class="stringliteral">&#39;GET&#39;</span>, <span class="stringliteral">&#39;/inventory&#39;</span>);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        $this-&gt;assertStringContainsStringIgnoringCase(</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="stringliteral">&quot;100&quot;</span>,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            $client-&gt;getResponse()-&gt;getContent()</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        );</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        $this-&gt;assertResponseRedirects(<span class="stringliteral">&#39;/inventory&#39;</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        $client-&gt;request(<span class="stringliteral">&#39;GET&#39;</span>, <span class="stringliteral">&#39;/inventory&#39;</span>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        $this-&gt;assertStringContainsStringIgnoringCase(</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="stringliteral">&quot;100&quot;</span>,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            $client-&gt;getResponse()-&gt;getContent()</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        );</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="anamespace_app_1_1_tests_1_1_controller_html"><div class="ttname"><a href="../../d7/d7a/namespace_app_1_1_tests_1_1_controller.html">App\Tests\Controller</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d93/_purchase_controller_test_8php_source.html#l00018">PurchaseControllerTest.php:18</a></div></div>

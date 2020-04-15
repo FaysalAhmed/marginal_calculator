@@ -55,6 +55,7 @@ class SellRepositoryTest extends KernelTestCase
         $this->_entityManager = $kernel->getContainer()
             ->get('doctrine')
             ->getManager();
+
         $container = self::$container;
         $this->_profitCalculator = $container
             ->get("App\Service\ProfitCalculator");
@@ -68,17 +69,21 @@ class SellRepositoryTest extends KernelTestCase
     private function _insertSell(): int
     {
         $totalProfit = 0;
+
         for ($i = 0; $i < self::TOTALITEMS; $i++) {
             $sell = new Sell();
             $sell->setQuantity(100);
             $sell->setPrice(100);
             $profit = $this->_profitCalculator
                 ->calculate($sell, $this->_entityManager);
+
             $totalProfit = $totalProfit + $profit;
+
             $sell->setProfit($profit);
             $this->_entityManager->persist($sell);
             $this->_entityManager->flush();
         }
+
         return $totalProfit;
     }
 
@@ -107,9 +112,11 @@ class SellRepositoryTest extends KernelTestCase
     public function testGetTotalProfit(): void
     {
         $totalProfit = $this->_insertSell();
+
         $profit = $this->_entityManager
             ->getRepository(Sell::class)
             ->getTotalProfit();
+
         $this->assertEquals($totalProfit, $profit);
     }
 
@@ -123,18 +130,25 @@ class SellRepositoryTest extends KernelTestCase
         $inventory = new Inventory();
         $inventory->setPrice(10);
         $inventory->setQuantity(17);
+
         $this->_entityManager->persist($inventory);
         $this->_entityManager->flush();
 
         $sell = new Sell();
         $sell->setQuantity(6);
         $sell->setPrice(21);
+
         $profit = $this->_profitCalculator->calculate($sell, $this->_entityManager);
+
         $sell->setProfit($profit);
+
         $this->_entityManager->persist($sell);
         $this->_entityManager->flush();
+
         $sellFromDB = $this->_entityManager->getRepository(Sell::class)->findAll();
+
         $this->assertNotNull($sellFromDB);
+
         foreach ($sellFromDB as $item) {
             $this->assertEquals($item->getPrice(), 21);
             $this->assertEquals($item->getQuantity(), 6);

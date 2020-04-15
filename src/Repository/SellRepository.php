@@ -64,6 +64,7 @@ class SellRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'DELETE FROM App\Entity\Sell AS sell'
         );
+
         return $query->execute();
     }
 

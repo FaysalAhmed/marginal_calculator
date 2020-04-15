@@ -104,42 +104,47 @@ $(document).ready(function(){initNavTree('db/da6/_profit_calculator_8php_source.
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="../../dc/dcc/class_app_1_1_service_1_1_profit_calculator.html#af28741564124123d8ff39ea9cfc84df8">   67</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../dc/dcc/class_app_1_1_service_1_1_profit_calculator.html#af28741564124123d8ff39ea9cfc84df8">calculate</a>(<a class="code" href="../../d1/d15/class_app_1_1_entity_1_1_sell.html">Sell</a> $sell, ObjectManager $entityManager)</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    {</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="comment">// get the total number of requested items</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        $itemCount = $sell-&gt;<a class="code" href="../../d1/d15/class_app_1_1_entity_1_1_sell.html#abae8ce0df3d9f49efcba4904a2d030a6">getQuantity</a>();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        $itemCount = $sell-&gt;<a class="code" href="../../d1/d15/class_app_1_1_entity_1_1_sell.html#abae8ce0df3d9f49efcba4904a2d030a6">getQuantity</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        $totalItems = $this-&gt;_inventoryRepository-&gt;getTotalInventoryItems();</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">if</span> ($totalItems &lt; $itemCount) {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="comment">// get each inventory item</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        $inventories = $this-&gt;_inventoryRepository-&gt;findAll();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">if</span> ($totalItems &lt; $itemCount) {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        $inventoryPrice = 0;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">foreach</span> ($inventories as $inventory) {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            <span class="keywordflow">if</span> ($itemCount &lt;= 0) {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordflow">if</span> ($inventory-&gt;getQuantity() &lt;= $itemCount) {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <span class="comment">// all items of inventory is required to fullfill.</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                $itemCount = $itemCount - $inventory-&gt;getQuantity();</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                $inventoryPrice = $inventoryPrice +</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    ($inventory-&gt;getQuantity() * $inventory-&gt;getPrice());</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                <span class="comment">// remove it from inventory</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                $entityManager-&gt;remove($inventory);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                $entityManager-&gt;flush();</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                <span class="comment">// not all item required</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                $inventoryNewCount = $inventory-&gt;getQuantity() - $itemCount;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                $inventoryPrice = $inventoryPrice +</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    ($itemCount * $inventory-&gt;getPrice());</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                $inventory-&gt;setQuantity($inventoryNewCount);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                $entityManager-&gt;persist($inventory);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                $entityManager-&gt;flush();</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            }</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        }</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">return</span> ($sell-&gt;<a class="code" href="../../d1/d15/class_app_1_1_entity_1_1_sell.html#a38146d2beb1dd6dfd0f2a5886e18a538">getPrice</a>() * $sell-&gt;<a class="code" href="../../d1/d15/class_app_1_1_entity_1_1_sell.html#abae8ce0df3d9f49efcba4904a2d030a6">getQuantity</a>()) - $inventoryPrice;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        $inventories = $this-&gt;_inventoryRepository-&gt;findAll();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">foreach</span> ($inventories as $inventory) {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">if</span> ($itemCount &lt;= 0) {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordflow">if</span> ($inventory-&gt;getQuantity() &lt;= $itemCount) {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                $itemCount = $itemCount - $inventory-&gt;getQuantity();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                $inventoryPrice = $inventoryPrice +</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    ($inventory-&gt;getQuantity() * $inventory-&gt;getPrice());</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                $entityManager-&gt;remove($inventory);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                $entityManager-&gt;flush();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                $inventoryNewCount = $inventory-&gt;getQuantity() - $itemCount;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                $inventoryPrice = $inventoryPrice +</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                    ($itemCount * $inventory-&gt;getPrice());</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                $inventory-&gt;setQuantity($inventoryNewCount);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                $entityManager-&gt;persist($inventory);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                $entityManager-&gt;flush();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">return</span> ($sell-&gt;<a class="code" href="../../d1/d15/class_app_1_1_entity_1_1_sell.html#a38146d2beb1dd6dfd0f2a5886e18a538">getPrice</a>() * $sell-&gt;<a class="code" href="../../d1/d15/class_app_1_1_entity_1_1_sell.html#abae8ce0df3d9f49efcba4904a2d030a6">getQuantity</a>()) - $inventoryPrice;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_app_1_1_service_1_1_profit_calculator_html_afa786c18bbc5a3baacb871fbf5c73d77"><div class="ttname"><a href="../../dc/dcc/class_app_1_1_service_1_1_profit_calculator.html#afa786c18bbc5a3baacb871fbf5c73d77">App\Service\ProfitCalculator\__construct</a></div><div class="ttdeci">__construct(InventoryRepository $inventoryRepository)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/da6/_profit_calculator_8php_source.html#l00053">ProfitCalculator.php:53</a></div></div>

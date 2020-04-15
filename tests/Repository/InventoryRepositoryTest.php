@@ -69,14 +69,17 @@ class InventoryRepositoryTest extends KernelTestCase
     private function _insertInventory() : int
     {
         $totalQuantities = 0;
+
         for ($i = 0 ; $i<self::TOTALITEMS; $i++) {
             $inventory = new Inventory();
             $inventory->setQuantity(100);
             $inventory->setPrice(10);
             $this->_entityManager->persist($inventory);
             $this->_entityManager->flush();
+
             $totalQuantities = $totalQuantities + 100;
         }
+
         return $totalQuantities;
     }
     /**

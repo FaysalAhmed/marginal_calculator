@@ -50,8 +50,11 @@ class PurchaseControllerTest extends WebTestCase
                 'purchase[price]' => 100
             ]
         );
+
         $this->assertResponseRedirects('/inventory');
+
         $client->request('GET', '/inventory');
+
         $this->assertStringContainsStringIgnoringCase(
             "100",
             $client->getResponse()->getContent()

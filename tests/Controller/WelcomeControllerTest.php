@@ -43,7 +43,6 @@ class WelcomeControllerTest extends WebTestCase
     public function testIndexRouteIsWorking()
     {
         $client = static::createClient();
-
         $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -61,9 +60,8 @@ class WelcomeControllerTest extends WebTestCase
     public function testLinksAndContentsAreAvailable()
     {
         $client = static::createClient();
-
         $client->request('GET', '/');
-        //check all links
+
         $this->assertStringContainsString(
             'Inventory',
             $client->getResponse()->getContent()
@@ -92,7 +90,6 @@ class WelcomeControllerTest extends WebTestCase
     public function testWelcomeTitleShouldBeMarginCalculator()
     {
         $client = static::createClient();
-
         $client->request('GET', '/');
 
         $this->assertSelectorTextContains('title', 'Margin Calculator');
@@ -110,6 +107,7 @@ class WelcomeControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', '/');
         $client->clickLink("Inventory List");
+
         $this->assertStringContainsStringIgnoringCase(
             "Inventory List",
             $client->getResponse()->getContent()
@@ -128,6 +126,7 @@ class WelcomeControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', '/');
         $client->clickLink("Add New Purchase");
+
         $this->assertStringContainsString(
             'Add a purchase',
             $client->getResponse()->getContent()
@@ -146,6 +145,7 @@ class WelcomeControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', '/');
         $client->clickLink('Sells List');
+
         $this->assertStringContainsString(
             'Sell List',
             $client->getResponse()->getContent()
@@ -164,6 +164,7 @@ class WelcomeControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', '/');
         $client->clickLink("Add New Sell");
+
         $this->assertStringContainsString(
             'Add a Sell',
             $client->getResponse()->getContent()
@@ -182,7 +183,9 @@ class WelcomeControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request("GET", '/');
         $client->clickLink('Reset');
+
         $this->assertResponseRedirects('/');
+
         return null;
     }
 
@@ -227,6 +230,7 @@ class WelcomeControllerTest extends WebTestCase
             ]
         );
         $client->request('GET', '/');
+
         $this->assertSelectorTextContains('.total-profit', '60');
     }
 }

@@ -49,11 +49,15 @@ class ProfitCalculatorTest extends KernelTestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         $kernel = self::bootKernel();
+
         $this->_entityManager = $kernel->getContainer()
             ->get('doctrine')
             ->getManager();
+
         $container = self::$container;
+
         $this->_profitCalculator = $container->get("App\Service\ProfitCalculator");
     }
 
@@ -67,13 +71,16 @@ class ProfitCalculatorTest extends KernelTestCase
         $inventory = new Inventory();
         $inventory->setPrice(17);
         $inventory->setQuantity(10);
+
         $this->_entityManager->persist($inventory);
         $this->_entityManager->flush();
 
         $sell = new Sell();
         $sell->setQuantity(6);
         $sell->setPrice(21);
+
         $profit = $this->_profitCalculator->calculate($sell, $this->_entityManager);
+
         $this->assertEquals($profit, 24);
     }
 }

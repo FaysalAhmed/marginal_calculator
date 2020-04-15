@@ -100,34 +100,41 @@ $(document).ready(function(){initNavTree('de/dbb/_profit_calculator_test_8php_so
 <div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="../../da/d17/class_app_1_1_tests_1_1_service_1_1_profit_calculator_test.html#a0bc688732d2b3b162ffebaf7812e78da">   49</a></span>&#160;    <span class="keyword">protected</span> <span class="keyword">function</span> <a class="code" href="../../da/d17/class_app_1_1_tests_1_1_service_1_1_profit_calculator_test.html#a0bc688732d2b3b162ffebaf7812e78da">setUp</a>(): void</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        parent::setUp();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        $kernel = self::bootKernel();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        $this-&gt;_entityManager = $kernel-&gt;getContainer()</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            -&gt;get(<span class="stringliteral">&#39;doctrine&#39;</span>)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            -&gt;getManager();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        $container = self::$container;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        $this-&gt;_profitCalculator = $container-&gt;get(<span class="stringliteral">&quot;App\Service\ProfitCalculator&quot;</span>);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="../../da/d17/class_app_1_1_tests_1_1_service_1_1_profit_calculator_test.html#af406fa90d459524e2fa9c3736f5e8ed5">   65</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../da/d17/class_app_1_1_tests_1_1_service_1_1_profit_calculator_test.html#af406fa90d459524e2fa9c3736f5e8ed5">testCalculate</a>(): void</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        $inventory = <span class="keyword">new</span> <a class="code" href="../../d7/d14/class_app_1_1_entity_1_1_inventory.html">Inventory</a>();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        $inventory-&gt;setPrice(17);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        $inventory-&gt;setQuantity(10);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        $this-&gt;_entityManager-&gt;persist($inventory);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        $this-&gt;_entityManager-&gt;flush();</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        $sell = <span class="keyword">new</span> <a class="code" href="../../d1/d15/class_app_1_1_entity_1_1_sell.html">Sell</a>();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        $sell-&gt;setQuantity(6);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        $sell-&gt;setPrice(21);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        $profit = $this-&gt;_profitCalculator-&gt;calculate($sell, $this-&gt;_entityManager);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        $this-&gt;assertEquals($profit, 24);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        $kernel = self::bootKernel();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        $this-&gt;_entityManager = $kernel-&gt;getContainer()</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            -&gt;get(<span class="stringliteral">&#39;doctrine&#39;</span>)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            -&gt;getManager();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        $container = self::$container;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        $this-&gt;_profitCalculator = $container-&gt;get(<span class="stringliteral">&quot;App\Service\ProfitCalculator&quot;</span>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="../../da/d17/class_app_1_1_tests_1_1_service_1_1_profit_calculator_test.html#af406fa90d459524e2fa9c3736f5e8ed5">   69</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../da/d17/class_app_1_1_tests_1_1_service_1_1_profit_calculator_test.html#af406fa90d459524e2fa9c3736f5e8ed5">testCalculate</a>(): void</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        $inventory = <span class="keyword">new</span> <a class="code" href="../../d7/d14/class_app_1_1_entity_1_1_inventory.html">Inventory</a>();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        $inventory-&gt;setPrice(17);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        $inventory-&gt;setQuantity(10);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        $this-&gt;_entityManager-&gt;persist($inventory);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        $this-&gt;_entityManager-&gt;flush();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        $sell = <span class="keyword">new</span> <a class="code" href="../../d1/d15/class_app_1_1_entity_1_1_sell.html">Sell</a>();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        $sell-&gt;setQuantity(6);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        $sell-&gt;setPrice(21);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        $profit = $this-&gt;_profitCalculator-&gt;calculate($sell, $this-&gt;_entityManager);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        $this-&gt;assertEquals($profit, 24);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_app_1_1_tests_1_1_service_1_1_profit_calculator_test_html_a0bc688732d2b3b162ffebaf7812e78da"><div class="ttname"><a href="../../da/d17/class_app_1_1_tests_1_1_service_1_1_profit_calculator_test.html#a0bc688732d2b3b162ffebaf7812e78da">App\Tests\Service\ProfitCalculatorTest\setUp</a></div><div class="ttdeci">setUp()</div><div class="ttdef"><b>Definition:</b> <a href="../../de/dbb/_profit_calculator_test_8php_source.html#l00049">ProfitCalculatorTest.php:49</a></div></div>
 <div class="ttc" id="aclass_app_1_1_entity_1_1_inventory_html"><div class="ttname"><a href="../../d7/d14/class_app_1_1_entity_1_1_inventory.html">App\Entity\Inventory</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d3b/_inventory_8php_source.html#l00041">Inventory.php:42</a></div></div>
-<div class="ttc" id="aclass_app_1_1_tests_1_1_service_1_1_profit_calculator_test_html_af406fa90d459524e2fa9c3736f5e8ed5"><div class="ttname"><a href="../../da/d17/class_app_1_1_tests_1_1_service_1_1_profit_calculator_test.html#af406fa90d459524e2fa9c3736f5e8ed5">App\Tests\Service\ProfitCalculatorTest\testCalculate</a></div><div class="ttdeci">testCalculate()</div><div class="ttdef"><b>Definition:</b> <a href="../../de/dbb/_profit_calculator_test_8php_source.html#l00065">ProfitCalculatorTest.php:65</a></div></div>
+<div class="ttc" id="aclass_app_1_1_tests_1_1_service_1_1_profit_calculator_test_html_af406fa90d459524e2fa9c3736f5e8ed5"><div class="ttname"><a href="../../da/d17/class_app_1_1_tests_1_1_service_1_1_profit_calculator_test.html#af406fa90d459524e2fa9c3736f5e8ed5">App\Tests\Service\ProfitCalculatorTest\testCalculate</a></div><div class="ttdeci">testCalculate()</div><div class="ttdef"><b>Definition:</b> <a href="../../de/dbb/_profit_calculator_test_8php_source.html#l00069">ProfitCalculatorTest.php:69</a></div></div>
 <div class="ttc" id="anamespace_app_1_1_tests_1_1_service_html"><div class="ttname"><a href="../../d9/d90/namespace_app_1_1_tests_1_1_service.html">App\Tests\Service</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/dbb/_profit_calculator_test_8php_source.html#l00018">ProfitCalculatorTest.php:18</a></div></div>
 <div class="ttc" id="aclass_app_1_1_tests_1_1_service_1_1_profit_calculator_test_html"><div class="ttname"><a href="../../da/d17/class_app_1_1_tests_1_1_service_1_1_profit_calculator_test.html">App\Tests\Service\ProfitCalculatorTest</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/dbb/_profit_calculator_test_8php_source.html#l00039">ProfitCalculatorTest.php:40</a></div></div>
 <div class="ttc" id="aclass_app_1_1_entity_1_1_sell_html"><div class="ttname"><a href="../../d1/d15/class_app_1_1_entity_1_1_sell.html">App\Entity\Sell</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d91/_sell_8php_source.html#l00013">Sell.php:14</a></div></div>

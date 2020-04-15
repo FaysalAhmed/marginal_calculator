@@ -67,7 +67,9 @@ class WelcomeController extends AbstractController
     {
         $this->getDoctrine()->getRepository(Inventory::class)->dropAll();
         $this->getDoctrine()->getRepository(Sell::class)->dropAll();
+
         $this->addFlash('success', 'Database Reset Complete');
+
         return $this->redirectToRoute('welcome');
     }
 }

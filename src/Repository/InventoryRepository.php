@@ -65,6 +65,7 @@ class InventoryRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'DELETE FROM App\Entity\Inventory AS inventory'
         );
+
         return $query->execute();
     }
 
@@ -80,11 +81,10 @@ class InventoryRepository extends ServiceEntityRepository
             $sql = '
         SELECT SUM(quantity) AS quantity FROM inventory
         ';
-
             $stmt = $conn->prepare($sql);
             $stmt->execute();
-
             $res =  $stmt->fetch();
+
             return $res['quantity'];
         } catch (DBALException $e) {
             return false;

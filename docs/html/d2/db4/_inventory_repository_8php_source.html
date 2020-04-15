@@ -106,21 +106,21 @@ $(document).ready(function(){initNavTree('d2/db4/_inventory_repository_8php_sour
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        $query = $entityManager-&gt;createQuery(</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="stringliteral">&#39;DELETE FROM App\Entity\Inventory AS inventory&#39;</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        );</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> $query-&gt;execute();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="../../db/db4/class_app_1_1_repository_1_1_inventory_repository.html#aaa4a495266b6ae671940a0c139972f9a">   76</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../db/db4/class_app_1_1_repository_1_1_inventory_repository.html#aaa4a495266b6ae671940a0c139972f9a">getTotalInventoryItems</a>()</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">try</span> {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            $conn = $this-&gt;getEntityManager()-&gt;getConnection();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            $sql = <span class="stringliteral">&#39;</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="stringliteral">        SELECT SUM(quantity) AS quantity FROM inventory</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="stringliteral">        &#39;</span>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">return</span> $query-&gt;execute();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="../../db/db4/class_app_1_1_repository_1_1_inventory_repository.html#aaa4a495266b6ae671940a0c139972f9a">   77</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../db/db4/class_app_1_1_repository_1_1_inventory_repository.html#aaa4a495266b6ae671940a0c139972f9a">getTotalInventoryItems</a>()</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">try</span> {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            $conn = $this-&gt;getEntityManager()-&gt;getConnection();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            $sql = <span class="stringliteral">&#39;</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="stringliteral">        SELECT SUM(quantity) AS quantity FROM inventory</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="stringliteral">        &#39;</span>;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            $stmt = $conn-&gt;prepare($sql);</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            $stmt-&gt;execute();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            $res =  $stmt-&gt;fetch();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            $res =  $stmt-&gt;fetch();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keywordflow">return</span> $res[<span class="stringliteral">&#39;quantity&#39;</span>];</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        } <span class="keywordflow">catch</span> (DBALException $e) {</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('d2/db4/_inventory_repository_8php_sour
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_app_1_1_repository_1_1_inventory_repository_html_a38ea33dde11163765f358f5f10a3bc03"><div class="ttname"><a href="../../db/db4/class_app_1_1_repository_1_1_inventory_repository.html#a38ea33dde11163765f358f5f10a3bc03">App\Repository\InventoryRepository\__construct</a></div><div class="ttdeci">__construct(ManagerRegistry $registry)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/db4/_inventory_repository_8php_source.html#l00052">InventoryRepository.php:52</a></div></div>
-<div class="ttc" id="aclass_app_1_1_repository_1_1_inventory_repository_html_aaa4a495266b6ae671940a0c139972f9a"><div class="ttname"><a href="../../db/db4/class_app_1_1_repository_1_1_inventory_repository.html#aaa4a495266b6ae671940a0c139972f9a">App\Repository\InventoryRepository\getTotalInventoryItems</a></div><div class="ttdeci">getTotalInventoryItems()</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/db4/_inventory_repository_8php_source.html#l00076">InventoryRepository.php:76</a></div></div>
+<div class="ttc" id="aclass_app_1_1_repository_1_1_inventory_repository_html_aaa4a495266b6ae671940a0c139972f9a"><div class="ttname"><a href="../../db/db4/class_app_1_1_repository_1_1_inventory_repository.html#aaa4a495266b6ae671940a0c139972f9a">App\Repository\InventoryRepository\getTotalInventoryItems</a></div><div class="ttdeci">getTotalInventoryItems()</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/db4/_inventory_repository_8php_source.html#l00077">InventoryRepository.php:77</a></div></div>
 <div class="ttc" id="aclass_app_1_1_entity_1_1_inventory_html"><div class="ttname"><a href="../../d7/d14/class_app_1_1_entity_1_1_inventory.html">App\Entity\Inventory</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d3b/_inventory_8php_source.html#l00041">Inventory.php:42</a></div></div>
 <div class="ttc" id="aclass_app_1_1_repository_1_1_inventory_repository_html"><div class="ttname"><a href="../../db/db4/class_app_1_1_repository_1_1_inventory_repository.html">App\Repository\InventoryRepository</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d2/db4/_inventory_repository_8php_source.html#l00045">InventoryRepository.php:46</a></div></div>
 <div class="ttc" id="aclass_app_1_1_repository_1_1_inventory_repository_html_a9d539cd8405c9f160abd02a34cf1ff46"><div class="ttname"><a href="../../db/db4/class_app_1_1_repository_1_1_inventory_repository.html#a9d539cd8405c9f160abd02a34cf1ff46">App\Repository\InventoryRepository\dropAll</a></div><div class="ttdeci">dropAll()</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/db4/_inventory_repository_8php_source.html#l00062">InventoryRepository.php:62</a></div></div>

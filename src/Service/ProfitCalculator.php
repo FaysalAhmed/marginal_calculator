@@ -66,33 +66,38 @@ class ProfitCalculator
      */
     public function calculate(Sell $sell, ObjectManager $entityManager)
     {
-        // get the total number of requested items
         $itemCount = $sell->getQuantity();
+
         $totalItems = $this->_inventoryRepository->getTotalInventoryItems();
+
         if ($totalItems < $itemCount) {
             return -1;
         }
-        // get each inventory item
-        $inventories = $this->_inventoryRepository->findAll();
+
         $inventoryPrice = 0;
+
+        $inventories = $this->_inventoryRepository->findAll();
+
         foreach ($inventories as $inventory) {
+
             if ($itemCount <= 0) {
                 break;
             }
+
             if ($inventory->getQuantity() <= $itemCount) {
-                // all items of inventory is required to fullfill.
                 $itemCount = $itemCount - $inventory->getQuantity();
+
                 $inventoryPrice = $inventoryPrice +
                     ($inventory->getQuantity() * $inventory->getPrice());
-                // remove it from inventory
+
                 $entityManager->remove($inventory);
                 $entityManager->flush();
             } else {
-                // not all item required
                 $inventoryNewCount = $inventory->getQuantity() - $itemCount;
 
                 $inventoryPrice = $inventoryPrice +
                     ($itemCount * $inventory->getPrice());
+
                 $inventory->setQuantity($inventoryNewCount);
                 $entityManager->persist($inventory);
                 $entityManager->flush();

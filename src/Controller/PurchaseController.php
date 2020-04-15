@@ -22,7 +22,6 @@ use App\Form\Type\PurchaseType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -52,6 +51,7 @@ class PurchaseController extends AbstractController
     public function add(): Response
     {
         $purchase = new Inventory();
+
         $form = $this->createForm(
             PurchaseType::class,
             $purchase,
@@ -60,6 +60,7 @@ class PurchaseController extends AbstractController
                 'method' => 'POST'
             ]
         );
+
         return $this
             ->render('purchase/add.html.twig', ['form' => $form->createView()]);
     }
@@ -102,10 +103,13 @@ class PurchaseController extends AbstractController
             $purchase = $form->getData();
             $entityManager->persist($purchase);
             $entityManager->flush();
+
             $this->addFlash('success', 'Added a purchase');
+
             return $this->redirectToRoute('purchase');
         } else {
             $this->addFlash('danger', 'error while adding purchase');
+
             return $this->redirectToRoute("purchase_add");
         }
     }

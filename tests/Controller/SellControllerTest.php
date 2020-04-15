@@ -58,7 +58,9 @@ class SellControllerTest extends WebTestCase
                 'sell[price]' => 100
             ]
         );
+
         $this->assertResponseRedirects('/sell');
+
         $client->request('GET', '/sell');
         $this->assertStringContainsString(
             '100',
