@@ -6,7 +6,7 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: 
+    branches:
       - staging
   pull_request:
     branches: [ staging ]
@@ -20,17 +20,17 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    - name:Composer Install
-      run: |
-        composer install --prefer-dist --no-scripts -q -o;
+      # Runs a single command using the runners shell
+      - name:Composer Install
+        run: |
+          composer install --prefer-dist --no-scripts -q -o;
 
-    # Runs a set of commands using the runners shell
-    - name: Run Test
-      run: |
+      # Runs a set of commands using the runners shell
+      - name: Run Test
+        run: |
           php bin/phpunit
-    # deploy to heroku 
+        # deploy to heroku
       
