@@ -1,15 +1,48 @@
 <?php
-
+/**
+ * Inventory file
+ *
+ * PHP version 7
+ *
+ * @category Entity
+ *
+ * @package App\Entity
+ *
+ * @author Faysal Ahmed <faysal.ahmed833@gmail.com>
+ *
+ * @license custom license http://www.eskimi.com/
+ *
+ * @link http://www.eskimi.com/
+ */
 namespace App\Entity;
 
+use DateTime;
+use DateTimeInterface;
+use DateTimeZone;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Inventory Class
+ *
+ * PHP version 7
+ *
+ * @category Entity
+ *
+ * @package App\Entity
+ *
+ * @author Faysal Ahmed <faysal.ahmed833@gmail.com>
+ *
+ * @license custom license http://www.eskimi.com/
+ *
+ * @link http://www.eskimi.com/
+ *
  * @ORM\Entity(repositoryClass="App\Repository\InventoryRepository")
  */
 class Inventory
 {
     /**
+     * ID
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -17,11 +50,15 @@ class Inventory
     private $id;
 
     /**
+     * Quantity
+     *
      * @ORM\Column(type="integer")
      */
     private $quantity;
 
     /**
+     * Price
+     *
      * @ORM\Column(type="float")
      */
     private $price;
@@ -33,8 +70,8 @@ class Inventory
 
     public function __construct()
     {
-        $now = new \DateTime('now');
-        $now->setTimezone(new \DateTimeZone('Asia/Dhaka'));
+        $now = new DateTime('now');
+        $now->setTimezone(new DateTimeZone('Asia/Dhaka'));
         $this->setCreatedAt($now);
     }
 
@@ -67,12 +104,12 @@ class Inventory
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 

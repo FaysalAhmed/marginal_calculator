@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
+use DateTimeZone;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\DateTime;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SellRepository")
@@ -38,8 +40,8 @@ class Sell
 
     public function __construct()
     {
-        $now = new \DateTime('now');
-        $now->setTimezone(new \DateTimeZone('Asia/Dhaka'));
+        $now = new DateTime('now');
+        $now->setTimezone(new DateTimeZone('Asia/Dhaka'));
         $this->setCreatedAt($now);
     }
 
@@ -84,12 +86,12 @@ class Sell
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
