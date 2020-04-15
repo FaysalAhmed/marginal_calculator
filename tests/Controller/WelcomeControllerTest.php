@@ -186,7 +186,12 @@ class WelcomeControllerTest extends WebTestCase
         return null;
     }
 
-    public function testCalculateFinalProfit()
+    /**
+     * Test code for calculating final profit
+     *
+     * @return void
+     */
+    public function testCalculateFinalProfit() : void
     {
         $client = static::createClient();
         $client->request('GET', '/purchase/add');

@@ -35,7 +35,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class SellControllerTest extends WebTestCase
 {
     /**
-     * Test add sell post method
+     * Test code for add sell
      *
      * @return void
      */

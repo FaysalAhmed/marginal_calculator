@@ -1,6 +1,6 @@
 <?php
 /**
- * Purchase Controller
+ * PurchaseController.php
  *
  * PHP version 7
  *
@@ -83,8 +83,7 @@ class PurchaseController extends AbstractController
     /**
      * Post entry point for Adding a purchase
      *
-     * @param Request            $request   Request object
-     * @param ValidatorInterface $validator to validate the input
+     * @param Request $request Request object
      *
      * @Route("/purchase/add",methods={"POST"}, name="post_purchase_add")
      *

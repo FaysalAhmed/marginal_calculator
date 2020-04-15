@@ -1,6 +1,6 @@
 <?php
 /**
- * Welcome Controller
+ * WelcomeController.php
  *
  * PHP version 7
  *
@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class WelcomeController
+ * WelcomeController Class
  *
  * @category Controller
  *
@@ -40,7 +40,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class WelcomeController extends AbstractController
 {
     /**
-     * Index controller
+     * Main entry point of the system
      *
      * @Route("/", name="welcome")
      *
