@@ -130,6 +130,7 @@ class SellRepositoryTest extends KernelTestCase
         $inventory = new Inventory();
         $inventory->setPrice(10);
         $inventory->setQuantity(17);
+        $inventory->setRemaining(10);
 
         $this->_entityManager->persist($inventory);
         $this->_entityManager->flush();

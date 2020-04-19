@@ -54,7 +54,18 @@ class SellControllerTest extends WebTestCase
         $client->submitForm(
             'Add Sell',
             [
-                'sell[quantity]' =>30,
+                'sell[quantity]' =>0, // check with quantity 0
+                'sell[price]' => 100
+            ]
+        );
+
+        $this->assertResponseRedirects('/sell/add');
+
+        $client->request('GET', '/sell/add');
+        $client->submitForm(
+            'Add Sell',
+            [
+                'sell[quantity]' =>100,
                 'sell[price]' => 100
             ]
         );

@@ -66,14 +66,15 @@ class InventoryRepositoryTest extends KernelTestCase
      *
      * @return int
      */
-    private function _insertInventory() : int
+    private function _insertInventory(): int
     {
         $totalQuantities = 0;
 
-        for ($i = 0 ; $i<self::TOTALITEMS; $i++) {
+        for ($i = 0; $i < self::TOTALITEMS; $i++) {
             $inventory = new Inventory();
             $inventory->setQuantity(100);
             $inventory->setPrice(10);
+            $inventory->setRemaining(100);
             $this->_entityManager->persist($inventory);
             $this->_entityManager->flush();
 
@@ -82,12 +83,13 @@ class InventoryRepositoryTest extends KernelTestCase
 
         return $totalQuantities;
     }
+
     /**
      * Test Dropping all entry from database
      *
      * @return void
      */
-    public function testDropAll() : void
+    public function testDropAll(): void
     {
         $this->_insertInventory();
         $this->_entityManager
@@ -100,17 +102,18 @@ class InventoryRepositoryTest extends KernelTestCase
     }
 
     /**
-     * Test total count of inventory
+     * Test total count of remaining inventory
      *
      * @return void
      */
-    public function testgetTotalInventoryItems() : void
+    public function testGetTotalRemainingItems(): void
     {
-        $total = $this->_insertInventory();
+        $this->_insertInventory();
         $totalFromDB = $this->_entityManager
             ->getRepository(Inventory::class)
-            ->getTotalInventoryItems();
-        $this->assertEquals($totalFromDB, $total);
+            ->getTotalRemainingItems();
+
+        $this->assertNotNull($totalFromDB);
     }
 
     /**
@@ -118,23 +121,31 @@ class InventoryRepositoryTest extends KernelTestCase
      *
      * @return void
      */
-    public function testInsertDataToInventory() : void
+    public function testInsertDataToInventory(): void
     {
         $inventory = new Inventory();
         $inventory->setPrice(100);
         $inventory->setQuantity(100);
+        $inventory->setRemaining(100);
+
         $this->_entityManager->persist($inventory);
         $this->_entityManager->flush();
+
         $inventoryFromDB = $this
             ->_entityManager
             ->getRepository(Inventory::class)
             ->findAll();
+
         $this->assertNotNull($inventoryFromDB);
+
         foreach ($inventoryFromDB as $item) {
             $this->assertEquals($item->getPrice(), 100);
             $this->assertEquals($item->getQuantity(), 100);
+            $this->assertEquals($item->getRemaining(), 100);
         }
     }
+
+
 
     /**
      * Tear Down the test

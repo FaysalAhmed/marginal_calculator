@@ -68,37 +68,34 @@ class ProfitCalculator
     {
         $itemCount = $sell->getQuantity();
 
-        $totalItems = $this->_inventoryRepository->getTotalInventoryItems();
-
+        $totalItems = $this->_inventoryRepository->getTotalRemainingItems();
         if ($totalItems < $itemCount) {
             return -1;
         }
 
         $inventoryPrice = 0;
 
-        $inventories = $this->_inventoryRepository->findAll();
-
+        $inventories = $this->_inventoryRepository->findAllByRemainingItems();
         foreach ($inventories as $inventory) {
-
             if ($itemCount <= 0) {
                 break;
             }
 
-            if ($inventory->getQuantity() <= $itemCount) {
-                $itemCount = $itemCount - $inventory->getQuantity();
+            if ($inventory->getRemaining() <= $itemCount) {
+                $itemCount = $itemCount - $inventory->getRemaining();
 
                 $inventoryPrice = $inventoryPrice +
-                    ($inventory->getQuantity() * $inventory->getPrice());
-
-                $entityManager->remove($inventory);
+                    ($inventory->getRemaining() * $inventory->getPrice());
+                $inventory->setRemaining(0);
+                $entityManager->persist($inventory);
                 $entityManager->flush();
             } else {
-                $inventoryNewCount = $inventory->getQuantity() - $itemCount;
+                $inventoryNewCount = $inventory->getRemaining() - $itemCount;
 
                 $inventoryPrice = $inventoryPrice +
                     ($itemCount * $inventory->getPrice());
 
-                $inventory->setQuantity($inventoryNewCount);
+                $inventory->setRemaining($inventoryNewCount);
                 $entityManager->persist($inventory);
                 $entityManager->flush();
                 break;

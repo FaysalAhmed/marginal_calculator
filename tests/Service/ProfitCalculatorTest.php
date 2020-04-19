@@ -71,6 +71,7 @@ class ProfitCalculatorTest extends KernelTestCase
         $inventory = new Inventory();
         $inventory->setPrice(17);
         $inventory->setQuantity(10);
+        $inventory->setRemaining(10);
 
         $this->_entityManager->persist($inventory);
         $this->_entityManager->flush();
