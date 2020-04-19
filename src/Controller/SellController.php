@@ -24,7 +24,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Sell Controller class
@@ -90,8 +89,8 @@ class SellController extends AbstractController
     /**
      * Store Sell data from add form
      *
-     * @param Request            $request    Request Object
-     * @param ProfitCalculator   $calculator Class to calculate the profit
+     * @param Request $request Request Object
+     * @param ProfitCalculator $calculator Class to calculate the profit
      *
      * @Route("sell/add", methods={"POST"}, name="post_sell_add")
      *
@@ -109,6 +108,10 @@ class SellController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sell = $form->getData();
+            if ($sell->getQuantity() == 0) {
+                $this->addFlash('danger', 'Quantity can not be 0');
+                return $this->redirectToRoute('sell_add');
+            }
             $profit = $calculator->calculate($sell, $entityManager);
             if ($profit == -1) {
                 $this->addFlash('danger', 'Not enough item in inventory');

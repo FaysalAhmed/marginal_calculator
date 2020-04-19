@@ -60,4 +60,25 @@ class PurchaseControllerTest extends WebTestCase
             $client->getResponse()->getContent()
         );
     }
+
+    /**
+     * Test list inventory columns
+     *
+     * @return void
+     */
+    public function testListInventory(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/inventory');
+
+        $content = $client->getResponse()->getContent();
+
+        $this->assertStringContainsString('Quantity', $content);
+        $this->assertStringContainsString(
+            'After Sell Quantity',
+            $content
+        );
+        $this->assertStringContainsString('Price', $content);
+        $this->assertStringContainsString('Created Time', $content);
+    }
 }

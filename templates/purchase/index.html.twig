@@ -10,6 +10,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Quantity</th>
+                    <th scope="col">After Sell Quantity</th>
                     <th scope="col">Price</th>
                     <th scope="col">Created Time</th>
                 </tr>
@@ -19,6 +20,7 @@
                     <tr>
                         <th scope="row">{{ purchase.getId() }}</th>
                         <td>{{ purchase.getQuantity() }}</td>
+                        <td>{{ purchase.remaining }}</td>
                         <td>{{ purchase.getPrice() }}</td>
                         <td>{{ purchase.getCreatedAt().format('Y-m-d H:i:s') }}</td>
                     </tr>

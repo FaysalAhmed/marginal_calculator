@@ -20,6 +20,7 @@ use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * Inventory Class
@@ -64,6 +65,15 @@ class Inventory
     private $price;
 
     /**
+     * Remaining items from the lot
+     *
+     * @ORM\Column(name="remaining", type="integer")
+     */
+    private $_remaining;
+
+    /**
+     * Created at
+     *
      * @ORM\Column(type="datetime")
      */
     private $created_at;
@@ -103,6 +113,20 @@ class Inventory
 
         return $this;
     }
+
+    public function getRemaining(): ?int
+    {
+        return $this->_remaining;
+    }
+
+    public function setRemaining(int $remaining): self
+    {
+        $this->_remaining = $remaining;
+
+        return $this;
+    }
+
+
 
     public function getCreatedAt(): ?DateTimeInterface
     {

@@ -20,8 +20,8 @@ namespace App\Controller;
 use App\Entity\Inventory;
 use App\Form\Type\PurchaseType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -57,7 +57,7 @@ class PurchaseController extends AbstractController
             $purchase,
             [
                 'action' => $this->generateUrl('post_purchase_add'),
-                'method' => 'POST'
+                'method' => 'POST',
             ]
         );
 
@@ -90,9 +90,8 @@ class PurchaseController extends AbstractController
      *
      * @return Response
      */
-    public function postAdd(
-        Request $request
-    ): Response {
+    public function postAdd(Request $request): Response
+    {
         $entityManager = $this->getDoctrine()->getManager();
 
         $purchase = new Inventory();
@@ -101,6 +100,8 @@ class PurchaseController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $purchase = $form->getData();
+            // a better way is to use Entity Listener
+            $purchase->setRemaining($purchase->getQuantity());
             $entityManager->persist($purchase);
             $entityManager->flush();
 

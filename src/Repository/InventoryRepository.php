@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Inventory Repository
  *
@@ -74,20 +75,36 @@ class InventoryRepository extends ServiceEntityRepository
      *
      * @return bool|int
      */
-    public function getTotalInventoryItems()
+    public function getTotalRemainingItems()
     {
         try {
             $conn = $this->getEntityManager()->getConnection();
             $sql = '
-        SELECT SUM(quantity) AS quantity FROM inventory
+        SELECT SUM(remaining) AS remaining FROM inventory
         ';
             $stmt = $conn->prepare($sql);
             $stmt->execute();
-            $res =  $stmt->fetch();
+            $res = $stmt->fetch();
 
-            return $res['quantity'];
+            return $res['remaining'];
         } catch (DBALException $e) {
             return false;
         }
+    }
+
+    /**
+     * Find items where remaining > 0
+     *
+     * @return mixed
+     */
+    public function findAllByRemainingItems()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $em = $this->getEntityManager();
+        return $em->createQuery(
+            "
+select inventory from App\Entity\Inventory inventory where inventory._remaining > 0 
+"
+        )->getResult();
     }
 }
